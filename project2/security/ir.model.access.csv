@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_projetprojet,access.projetprojet,model_projetprojet,,1,1,1,1
+access_projetprojet_contact,access.projetprojet.contact,model_projetprojet_contact,,1,1,1,1
+access_projetprojet_budget,access.projetprojet.budget,model_projetprojet_budget,,1,1,1,1
+access_projetprojet_event,access.projetprojet.event,model_projetprojet_event,,1,1,1,1
+access_projetprojet_versement,access.projetprojet.versement,model_projetprojet_versement,,1,1,1,1
+access_projetprojet_evaluation,access.projetprojet.evaluation,model_projetprojet_evaluation,,1,1,1,1
+access_projetprojet_materiel,access.projetprojet.materiel,model_projetprojet_materiel,,1,1,1,1
+access_projetprojet_mattechnique,access.projetprojet.mattechnique,model_projetprojet_mattechnique,,1,1,1,1
+access_projetprojet_batiments,access.projetprojet.batiments,model_projetprojet_batiments,,1,1,1,1
+access_projetprojet_beneficiaire,access.projetprojet.beneficiaire,model_projetprojet_beneficiaire,,1,1,1,1

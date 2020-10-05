@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/css" href="style/style.css"?>
+<odoo>
+<record model="ir.ui.view" id="projet_form_templates">
+        <field name="name">Projets form</field>
+        <field name="model">projetprojet</field>
+	<field name="arch" type="xml">
+            <form name="name_projet" id="fiche_projet">
+		<header>
+		   <button name="action_etude" type="object" string="Etude" class="oe_highlight" attrs="{'invisible':[('Etapes','not in','Nouveau')]}" options="{}"/>
+		   <button name="action_valider" type="object" string="Validé" class="oe_highlight" attrs="{'invisible':[('Etapes','not in','Etude')]}"  options="{}"/>
+		   <button name="action_encour" type="object" string="En cours" class="oe_highlight" attrs="{'invisible':[('Etapes','not in','Validé')]}"  options="{}"/>
+		   <button name="action_refuser" type="object" string="Refuser" class="oe_highlight" attrs="{'invisible':[('Etapes','not in','Validé')]}"  options="{}"/>
+		   <button name="action_cloture" type="object" string="Cloture" class="oe_highlight" attrs="{'invisible':[('Etapes','not in','En cours')]}"  options="{}"/>
+		   <field name="Etapes" widget="statusbar" statusbar_visible="Nouveau,Etude,Validé,En cour,Cloture" />
+		</header>
+		<sheet>
+		<!--<div class="oe_button_box" name="button_box">
+			<button name="open_document" type="object" class="oe_stat_button" icon="fa-files-o">
+			<field name="document_new" string="Document" widget="statinfo"/>
+		</button>
+		</div>-->
+		<widget name="web_ribbon" title="Annulé" bg_color="bg-danger" attrs ="{'invisible':[('status', '!=', 'Annuler')]}"/>
+		<widget name="web_ribbon" title="confirmé" bg_color="bg-success" attrs ="{'invisible':[('status', '!=', 'Confirmer')]}"/>
+		<widget name="web_ribbon" title="En cours" bg_color="bg-primary" attrs ="{'invisible':[('status', '!=', 'En cours')]}"/>
+		<widget name="web_ribbon" title="Brouillon" bg_color="bg-warning" attrs ="{'invisible':[('status', '!=', 'Brouillon')]}"/>
+		<h1 class="mt0" modifiers="{}">
+			<field name="name_projet" placeholder="Nom du projet" readonly="False"  modifiers="{'readonly':false,'required':true}"/>
+		</h1>
+		<group>
+		<group>
+		<field name="type_projet"/>
+		<field name="status"/>
+		<field name="company_id" required="1"  on_change="1" can_create="true" can_write="true"/>
+		<field name="code_analytique" string="Code analytique"/>
+		</group>
+		<group>
+		<field name="description_projet" string="Descriptif du projet"/>
+		</group>
+		<group>
+		</group>
+		<group>
+		<field name="country_id1" placeholder="Pays" class="o_address_country" options="{'no_open': True, 'no_create': True}" can_create="true" can_write="true" modifiers="{}"/>
+		</group>
+		</group>
+	<notebook>
+		<page string="Infos">
+		<group>
+		<group>
+			<separator string="L'organisation" modifiers="{}"/>
+			<tr>
+			</tr>
+			<label for="street" string="Adresse" modifiers="{}"/>
+			<div class="o_address_format" modifiers="{}">
+							<field name="street" placeholder="Village..." class="o_address_street" modifiers="{}"/>
+							<field name="city" placeholder="Arrondissement" class="o_address_city" modifiers="{}"/>
+							<field name="zip" placeholder="Code postale" class="o_address_zip" modifiers="{}"/>
+							<field name="country_id" placeholder="Pays" class="o_address_country" required="0"  modifiers="{}"/>			
+						        <field name="phone" placeholder="Téléphone" string="Téléphone"/>
+							<field name="email" string="Adresse email"/>
+			</div>
+		</group>
+		<group>
+			<separator string="Historique du projet" modifier="{}"/>
+			<tr>
+			</tr>
+			<field name="date"/>
+		        <field name="user_id"/>
+			<field name="histoire_project" placeholder="écrire son histoire..."/>
+		</group>
+                <group>
+                	<separator string="Contexte socio-politique" modifier="{}"/>
+               		<tr>
+                	</tr>
+			<field name="context_ville" string="Ville" placeholder="contexte socio-politique de la ville"/>
+    			<field name="context_pays" string="Pays" placeholder="contexte socio-politique du pays"/>
+		</group>
+		</group>
+		</page>
+		<page string="Bénéficaires">
+		<group>
+		<group>
+		<separator string="Bénéficiaires directs"/>
+		<tr>
+		</tr>
+        		<field name="role" string="Nature"/>    
+	    		<field name="nombre" string="nombre"/>
+	       </group>
+		<group>
+		<separator string="Bénéficiaires indirects"/>
+                <tr>
+                </tr>
+                        <field name="role1" string="Nature"/>
+                        <field name="nombre1" string="nombre"/>
+		</group>
+		</group>
+		<separator string="Bénéficiaires"/>
+                	<tr>
+                	</tr>
+			<field name="beneficiaire_list_lines">
+			<tree editable="bottom">
+			<field name="the_contact_id"/>
+			</tree>
+			</field>
+		</page>
+
+                <page string="Contact">
+                <field name="contact_list_lines">
+			<tree editable="bottom">
+			<field name="the_contact_id1"/>
+			<field name="organisation"/>	
+			<field name="begin_date"/>
+			<field name="the_contact_id" invisible="1"/>
+			<field name="contact_represent"/>
+			<field name="end_date"/>		
+			</tree>
+		</field>
+		</page>
+                <page string="Coordonnées">
+			<group modifiers="{}">
+	
+			<group modifiers="{}">
+			<field name="company_id" required="0"  on_change="1" can_create="true" can_write="true"/>
+			<field name="adresse_postale" placeholder="adresse postale" string="Adresse postale"/>
+    			<field name="ville" placeholder="ville" string="Ville"/>
+    			<field name="departement" placeholder="département" string="Département"/> 
+			<field name="country_id1" placeholder="Pays" class="o_address_country" options="{'no_open': True, 'no_create': True}" required="0" can_create="true" can_write="true"  modifiers="{}"/>
+			</group>
+
+			<group>
+		        <field name="tel_project" placeholder="téléphone" string="Téléphone"/>
+			<field name="adresse_email" placeholder="email" string="Adresse email"/>
+			</group>
+			
+			</group>
+                </page>
+		<page string="Budget">
+		<field name="budget_list_lines">
+                <tree editable="bottom">
+			<field name="the_budget_id" invisible="1"/>
+			<field name="annee" />
+                        <field name="commission_date"/>
+			<field name="demande" widget="monetary" options="{'currency_id': %(base.europe)d}" />
+                        <field name="valider" widget="monetary" options="{'currency_id': %(base.europe)d}" />
+                        <field name="depasser" widget="monetary" options="{'currency_id': %(base.europe)d}" />
+                </tree>
+                </field>
+		</page>
+		<page string="Versements">
+		<field name="versement_list_lines" domain="[]" context="{'group_by': 'date'}">
+		<tree>
+		<field name="date"/>
+		<field name="object"/>
+		<field name="montant" widget="monetary"  options="{'currency_id': %(base.europe)d}"/>
+		</tree>
+		<form>
+		<group>
+			<group>
+			<field name="date"/>
+			<field name="montant" widget="monetary"  options="{'currency_id': %(base.europe)d}"/>
+			</group>
+			<group>
+			<field name="object"/>
+			</group>
+		</group>
+		</form>
+		</field>
+                </page>
+
+                <page string="Notes">
+	<div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+            <field name="message_ids" widget="mail_thread" options="{'display_log_button': True}"/>
+		</div>
+		
+		</page>
+                <page string="Evenements">
+		<field name="event_list_lines">
+		<tree>
+		<field name="type_passage"/>
+		<field name="description"/>
+		<field name="date"/>
+		</tree>
+		<form>
+			<group>
+			<group>
+				<field name="date"/>
+				<field name="type_passage"/>
+			</group>
+			<group>
+				<field name="description"/>
+			</group>
+			</group>
+		</form>
+		</field>
+                </page>
+		<page string="Inventaire">
+                <separator string="Inventaire des batiments"/>
+                <tr>
+                </tr>
+		<field name="batiments_list_lines">
+		<tree editable="bottom">
+		<field name="date_aqui"/>
+		<field name="ville"/>
+		<field name="fonction"/>
+		<field name="type_batiments"/>
+		<field name="etat"/>
+		</tree>
+		</field>        
+	        <separator string="Inventaire du matériel roulant"/>
+                <tr>
+                </tr>
+		<field name="materiel_list_lines">
+		<tree editable="bottom">
+		<field name="date_aqui"/>
+		<field name="vehicule" string="Véhicule"/>
+   		<field name="Immatriculation" string="Immatriculation"/>
+   		<field name="type_vehicule"/>
+		<field name="etat"/>
+		</tree>
+		</field>
+                <separator string="Inventaire du matériel technique"/>
+                <tr>
+                </tr>
+		<field name="mattechnique_list_lines">
+                <tree editable="bottom">
+                <field name="date_aqui"/>
+		<field name="nom"/>
+		<field name="nombre"/>
+                <field name="type_materiel"/>
+                <field name="etat"/>
+                </tree>
+                </field>
+		</page>
+                <page string="Evaluation">
+		<field name="evaluation_list_lines">
+		<tree>
+		<field name="annee"/>
+		<field name="objectif_fixer"/>
+		<field name="evaluation_milieu"/>
+		<field name="evaluation_fin"/>
+		<field name="resultat_evaluation"/>
+		</tree>
+		<form>
+			<group>
+		<field name="annee"/>
+                <field name="objectif_fixer"/>
+                <field name="evaluation_milieu"/>
+                <field name="evaluation_fin"/>
+                <field name="resultat_evaluation"/>
+			</group>
+		</form>
+		</field>
+                </page>
+		</notebook> 
+		</sheet>
+	   </form>
+        </field>
+    </record>
+<record model="ir.ui.view" id="projet_tree_templates">
+        <field name="name">Projets tree</field>
+        <field name="model">projetprojet</field>
+        <field name="arch" type="xml">
+            <tree decoration-warning="status == 'Brouillon'" decoration-danger="status == 'Annuler'"
+		  decoration-info="status == 'En cours'" decoration-success="status == 'Confirmer'">
+                <field name="name_projet"/>
+		<field name="user_id"/>
+                <field name="country_id"/>
+                <field name="date"/>
+		<field name="status"/>
+		<field name="Etapes"/>
+           </tree>
+        </field>
+    </record>
+
+<record id="view_partner_form_inherit" model="ir.ui.view">
+	<field name="name">res.partner.inherit</field>
+	<field name="model">res.partner</field>
+	<field name="inherit_id" ref="base.view_partner_form"/>
+	<field name="arch" type="xml">
+		<field name="vat" position="attributes">
+			<attribute name="invisible">1</attribute>
+		</field>
+		<page name="sales_purchases" position="attributes">
+			<attribute name="invisible">1</attribute>
+		</page>
+	</field>
+</record>
+
+<record id="projet_search_view" model="ir.ui.view">
+	<field name="name">projet.search.view</field>
+	<field name="model">projetprojet</field>
+	<field name="arch" type="xml">
+	         <search string="Search projet">
+		   <field name="name" filter_domain="['|', ('name_projet', 'ilike', self), ('country_id', 'ilike', self)]"/>
+                    <filter name="Brouillon" string="Brouillon" domain="[('status','=','Brouillon')]"/>
+                    <filter name="En cour" string="En cour" domain="[('status','=','En cour')]"/>
+                    <filter name="Confirmer" string="Confirmer" domain="[('status','=','Confirmer')]"/>
+                    <filter name="Annuler" string="Annuler" domain="[('status','=','Annuler')]"/>
+                    <separator/>
+                    <filter name ="Aujourd'hui" string="Aujourd'hui" domain="[('date','&lt;=',time.strftime('%Y-%m-%d 23:59:59')),('date','&gt;=',time.strftime('%Y-%m-%d 00:00:00'))]"/>
+                    <filter name="Hier" string="Hier" domain="[('date','&lt;=', ((context_today()-datetime.timedelta(days=1)).strftime('%Y-%m-%d 23:59:59'))), ('date','&gt;=', ((context_today()-datetime.timedelta(days=1)).strftime('%Y-%m-%d 00:00:00')))]"/>
+                </search>
+	</field>
+</record>
+	<record model="ir.actions.act_window" id="action_projet_button">
+	    <field name="name">Projets</field>
+	    <field name="type">ir.actions.act_window</field>
+	    <field name="res_model">projetprojet</field>
+	    <field name="view_mode">tree,form,pivot,search</field>
+	    <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+               Créer un nouveau projet  
+            </p>
+        </field>
+    </record>
+        <record model="ir.actions.act_window" id="open_document">
+            <field name="name">Documents</field>
+            <field name="res_model">document</field>
+            <field name="view_mode">tree,form,pivot,graph,search</field>
+	    <field name="domain">[]</field>
+	   <field name="context">{}</field>
+    </record>
+	<menuitem id="projet_projet" name="Projets" sequence="0"/>
+	<menuitem id="projet_date" name="Créer" parent="projet_projet" action="action_projet_button"/>
+</odoo>

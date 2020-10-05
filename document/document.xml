@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="action_attachment" model="ir.actions.act_window">
+<field name="name">Attachments</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_id" eval="False"/>
+            <field name="res_model">ir.attachment</field>
+        </record>
+<menuitem id="document_document" name="Documents" sequence="1"/>
+<menuitem action="action_attachment" id="menu_action_attachment" parent="document_document"/>
+</odoo>

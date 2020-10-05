@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--	<template id="report_fiche_projets">
+	<t t-call="web.html_container">
+		<t t-foreach="docs" t-as="doc">
+			<t t-call="web.external_layout"/>
+			<h2>Fiche Projet</h2>
+			Nom du projet : <t t-esc="doc.name_projet"/><br></br>
+                        Patient Name: <t t-esc="doc.user_id"/>
+		</t>
+	</t>
+	</template>
+-->
+        <template id="report_projet">
+        <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                        <t t-call="web.external_layout">
+			<!--<t t-call="projet1.report_fiche_projets">-->
+			<div class="page">
+			<center><h2>Fiche Projet</h2></center>
+			<h3><span t-field="doc.name_projet"/></h3>
+			<center>
+                    <table style="width:900px;height:100px;margin:10 10 10 10">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <b>Type de projet:</b>
+                                </td>
+                                <td>
+                                    <span t-field="doc.type_projet"/>
+                                </td>
+                                <td>		
+				<b>Statut du Projet:</b>
+				</td>
+				<td>
+				<span t-field="doc.status"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<b>Etapes du projet:</b>
+				</td>
+				<td>
+					<span t-field="doc.Etapes"/>
+				</td>
+				<td>
+                                        <b>Organisation:</b>
+                                </td>
+                                <td>
+                                        <span t-field="doc.company_id.name"/>
+                                </td>
+			</tr>
+		</tbody>
+		</table>
+		</center>
+		</div>
+			<tr>
+			<td style="font-size:17px">
+		<center>
+		<table style="width:900px;height:100px;margin:10 10 10 10">
+		<tbody>
+			<td>
+			<h4>L'organisation</h4>
+			<span t-field="doc.street"/><br></br>
+			<span t-field="doc.city"/><br></br>
+			<span t-field="doc.zip"/><br></br>
+			<span t-field="doc.country_id"/><br></br>
+			<span t-field="doc.phone"/><br></br>
+			<span t-field="doc.email"/><br></br>
+			</td><td>
+			<h4>Historique du projet</h4>
+                                        <b>Date de Création du projet : </b>
+                                        <span t-field="doc.date"/>
+                     		<br></br>
+					<b>Créateur du projet : </b>
+					<span t-field="doc.user_id.name"/>
+				<br></br>
+					<b>Histoire : </b>
+					<span t-field="doc.histoire_project"/>		
+			</td>
+		</tbody>
+		</table>
+		</center>
+		</td>
+		</tr>		
+	<tr>
+	<td style="font-size:17px;">
+	<center>	
+	<table style="width:900px;height:100px;margin:10 10 10 10">
+                <tbody>
+		<td>
+		<h4>Bénéficiaires directs</h4>
+		<b>Nature : </b>
+		<span t-field="doc.role"/>
+		<br></br>
+		<b>nombre : </b>
+		<span t-field="doc.nombre"/>
+		</td><td>
+		<h4>Bénéficiaires indirects</h4>
+		<b>Nature : </b>
+		<span t-field="doc.role1"/>
+		<br></br>
+		<b>Nombre : </b>
+		<span t-field="doc.nombre1"/>
+		</td>
+		</tbody>
+	</table>
+	</center>
+	<h4>Bénéficiaires</h4>
+	<table class="table report_border">
+		<th style="width: 10%;">Bénéficiaires</th>
+	<tbody>
+		<t t-foreach="doc.beneficiaire_list_lines" t-as="line">
+     		<tr>
+		<td><span t-field="line.the_contact_id.name"/></td>
+		</tr>
+	</t>
+	</tbody>
+	</table>
+	</td>
+	</tr>
+		<tr>
+		<h4>Contact</h4>
+        	<td style="font-size:17px;">
+		<table class="table report_border">
+                <th style="width: 10%;">Fiche contact</th>
+		<th style="width: 10%;">Organisation</th>
+		<th style="width: 10%;">Date de début</th>
+		<th style="width: 10%;">Rôle</th>
+		<th style="width: 10%;">Date de fin</th>
+        <tbody>
+                <t t-foreach="doc.contact_list_lines" t-as="line">
+                <tr>
+                <td><span t-field="line.the_contact_id1.name"/></td>
+		<td><span t-field="line.organisation.name"/></td>
+		<td><span t-field="line.begin_date"/></td>
+		<td><span t-field="line.contact_represent"/></td>
+		<td><span t-field="line.end_date"/></td>
+                </tr>
+        </t>
+        </tbody>
+        </table>
+		</td>
+		</tr>
+	<tr>
+	<br><br><br><br><br>
+	</br></br></br></br></br>
+	<p style="page-break-before:always;"></p>
+	<h4>Coordonnées</h4>
+		<td>
+                                        <b>Adresse postale : </b>
+                                        <span t-field="doc.adresse_postale"/>
+                                <br></br>
+                                        <b>Ville : </b>
+                                        <span t-field="doc.ville"/>
+                                <br></br>
+                                        <b>Département : </b>
+                                        <span t-field="doc.departement"/>
+                                <br></br>
+                                        <b>Pays : </b>
+                                        <span t-field="doc.country_id1"/>
+                                <br></br>
+                                        <b>Téléphone : </b>
+                                        <span t-field="doc.tel_project"/>
+                                <br></br>
+                                        <b>Adresse email : </b>
+                                        <span t-field="doc.adresse_email"/>
+                 </td>
+	</tr>
+	                <tr>
+		<br></br>
+        	<h4>Budget</h4>
+                <td style="font-size:17px;">
+                <table class="table report_border">
+                <th style="width: 10%;">Année</th>
+                <th style="width: 10%;">Date de commission</th>
+                <th style="width: 10%;">Demande</th>
+                <th style="width: 10%;">Validé</th>
+                <th style="width: 10%;">Dépensé</th>
+        <tbody>
+                <t t-foreach="doc.budget_list_lines" t-as="line">
+                <tr>
+                <td><span t-field="line.annee"/></td>
+                <td><span t-field="line.commission_date"/></td>
+<!--            <td><span t-field="line.demande" t-field-options="{'widget':'True'}"/></td>
+                <td><span t-field="line.valider" t-field-options="{'widget':'True'}"/></td>
+                <td><span t-field="line.depasser" t-field-options="{'widget':'True'}"/></td>
+-->                </tr>
+        </t>
+        </tbody>
+        </table>
+                </td>
+                </tr>
+<tr>
+            <br></br>
+                <h4>Versements</h4>
+                <td style="font-size:17px;">
+                <table class="table report_border">
+                <th style="width: 10%;">Date de paiement</th>
+                <th style="width: 10%;">Objet</th>
+                <th style="width: 10%;">Montant</th>
+        <tbody>
+                <t t-foreach="doc.versement_list_lines" t-as="line">
+                <tr>
+                <td><span t-field="line.date"/></td>
+                <td><span t-field="line.object"/></td><!--
+                <td><span t-field="line.montant"/></td>-->
+                </tr>
+        </t>
+        </tbody>
+        </table>
+                </td>
+                </tr>
+<tr>
+            <br></br>
+                <h4>Evenements</h4>
+                <td style="font-size:17px;">
+                <table class="table report_border">
+                <th style="width: 10%;">Type</th>
+                <th style="width: 10%;">Description</th>
+                <th style="width: 10%;">Date</th>
+        <tbody>
+                <t t-foreach="doc.event_list_lines" t-as="line">
+                <tr>
+                <td><span t-field="line.type_passage"/></td>
+                <td><span t-field="line.description"/></td>
+                <td><span t-field="line.date"/></td>
+                </tr>
+        </t>
+        </tbody>
+        </table>
+                </td>
+                </tr>
+
+<tr>
+            <br></br>
+                <h4>Inventaire des bâtiments</h4>
+                <td style="font-size:17px;">
+                <table class="table report_border">
+                <th style="width: 10%;">Date d'aquisition</th>
+                <th style="width: 10%;">Ville</th>
+                <th style="width: 10%;">Fonction</th>
+                <th style="width: 10%;">Type</th>
+                <th style="width: 10%;">Etat</th>
+        <tbody>
+                <t t-foreach="doc.batiments_list_lines" t-as="line">
+                <tr>
+                <td><span t-field="line.date_aqui"/></td>
+                <td><span t-field="line.ville"/></td>  
+                <td><span t-field="line.fonction"/></td>
+                <td><span t-field="line.type_batiments"/></td>
+                <td><span t-field="line.etat"/></td>
+                </tr>
+        </t>
+        </tbody>
+        </table>
+                </td>
+                </tr>
+
+<tr>
+            <br></br>
+                <h4>Inventaire du matériel roulant</h4>
+                <td style="font-size:17px;">
+                <table class="table report_border">
+                <th style="width: 10%;">Date d'aquisition</th>
+                <th style="width: 10%;">Véhicule</th>
+                <th style="width: 10%;">Immatriculation</th>
+                <th style="width: 10%;">Type</th>
+                <th style="width: 10%;">Etat</th>
+        <tbody>
+                <t t-foreach="doc.materiel_list_lines" t-as="line">
+                <tr>
+                <td><span t-field="line.date_aqui"/></td>
+                <td><span t-field="line.vehicule"/></td>
+                <td><span t-field="line.Immatriculation"/></td>
+                <td><span t-field="line.type_vehicule"/></td>
+                <td><span t-field="line.etat"/></td>
+                </tr>
+        </t>
+        </tbody>
+        </table>
+                </td>
+                </tr>
+
+<tr>
+            <br></br>
+                <h4>Inventaire du matériel technique</h4>
+                <td style="font-size:17px;">
+                <table class="table report_border">
+                <th style="width: 10%;">Date d'aquisition</th>
+                <th style="width: 10%;">Nom</th>
+                <th style="width: 10%;">Nombre</th>
+                <th style="width: 10%;">Type</th>
+                <th style="width: 10%;">Etat</th>
+        <tbody>
+                <t t-foreach="doc.mattechnique_list_lines" t-as="line">
+                <tr>
+                <td><span t-field="line.date_aqui"/></td>
+                <td><span t-field="line.nom"/></td>
+                <td><span t-field="line.nombre"/></td>
+                <td><span t-field="line.type_materiel"/></td>
+                <td><span t-field="line.etat"/></td>
+                </tr>
+        </t>
+        </tbody>
+        </table>
+                </td>
+                </tr>
+
+        </t>
+	</t>
+	</t>
+        </template>
+</odoo>

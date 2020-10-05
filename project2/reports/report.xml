@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<report 
+	id="report_fiche_projet"
+	string="Fiche Projet"
+	model="projetprojet"
+	report_type="qweb-pdf"
+	name="project4.report_projet"
+	file="project4.report_projet"/>
+</odoo>
